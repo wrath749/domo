@@ -8,9 +8,9 @@ function Navbar(){
         <Link to = {"/signup"} className="px-[5rem]">
             SignUp
         </Link>
-        <div>
+        <Link to = {'/signin'} >
             SignIn
-        </div>
+        </Link>
     </div>
 }
 
