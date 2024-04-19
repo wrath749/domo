@@ -28,7 +28,7 @@ function App() {
       </div>
       <div className="mb-4 flex justify-center items-center w-screen">
         <input
-          type="text"
+          type="text"   
           value={text}
           placeholder="enter the prompt"
           className="px-4 py-2 rounded-md w-80 bg-[#2D2D3A] text-white"
