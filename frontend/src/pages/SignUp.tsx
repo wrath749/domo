@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function SignIn(){
+export default function Signup(){
     return <div className="grid grid-cols-2">
         <div className="bg-[#28282b] text-white h-screen">
             signin
@@ -9,10 +9,10 @@ export default function SignIn(){
         <div className="flex justify-center items-center h-screen">
         <div className="w-96 p-8  rounded-lg mx-auto">
           <div className="font-bold text-3xl mb-4 flex items-center justify-center">
-            Sign In
+            Sign Up
           </div>
           <div className="text-xl text-gray-500 mb-8 flex items-center justify-center">
-            Don't have an account? <Link to={"/signup"}>Signup</Link>
+            Don't have an account? <Link to={"/signin"} className="text-blue-500">Signup</Link>
           </div>
           <div className="mb-4">
             <label htmlFor="email" className="font-bold text-lg block">
