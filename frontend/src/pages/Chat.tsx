@@ -1,45 +1,74 @@
 import { useState } from "react";
+import axios from "axios";
 
 function Chat() {
-  const [text, setText] = useState<string>("");
-  const [messages, setMessages] = useState<string[]>([]);
+  const [text, setText] = useState("");
+  const [response, setResponse] = useState("");
+  const [prompt, setPrompt] = useState("");
 
-  const handleClick = () => {
-    // Implement your logic for handling click here
-    // For now, let's just add the input text to messages array
-    setMessages([...messages, text]);
-    setText("");
+  const handleClick = async () => {
+    // Define the predefined response based on the input message
+    const response = await axios.post("http://localhost:11434/api/generate", {
+      model: "medllama2",
+      prompt: prompt,
+      stream: false,
+    });
+
+    const responseData = response.data.response;
+    console.log(responseData);
+    setResponse(responseData);
+    setPrompt("");
+
+    // Clear the input text
   };
 
-  const handleKeyPress = (e: { key: string; }) => {
-    if (e.key === 'Enter') {
-      handleClick();
-    }
-  };
+  // const handleKeyPress = (e: { key: string }) => {
+  //   if (e.key === "Enter") {
+  //     handleClick();
+  //   }
+  //   setPrompt("");
+  // };
 
   return (
-    <div className="bg-[#20202B] min-h-screen flex flex-col justify-between items-center">
-      <div className="flex flex-col justify-end items-start h-full w-full overflow-y-auto p-4">
-        {messages.map((message, index) => (
-          <div key={index} className="text-white mb-2">
-            {message}
-          </div>
-        ))}
+    <div className="bg-gray-800 min-h-screen flex flex-col">
+      {/* Chat header */}
+      <div className="bg-gray-900 py-4 px-6 flex items-center justify-between">
+        <h1 className="text-lg font-bold text-white">VaidAI</h1>
       </div>
-      <div className="mb-4 flex justify-center items-center w-screen">
+
+      {/* Chat area */}
+      <div className="flex-1 p-4 overflow-y-auto">
+        {/* Display input message */}
+        {prompt && (
+          <div className="flex justify-end mb-4">
+            <div className="max-w-xs px-4 py-2 rounded-lg bg-blue-500 text-white">
+              {prompt}
+            </div>
+          </div>
+        )}
+        {/* Display response message */}
+        <div className="flex justify-start mb-4">
+          <div className="max-w-xs px-4 py-2 rounded-lg bg-gray-700 text-white">
+            {response}
+          </div>
+        </div>
+      </div>
+
+      {/* Input area */}
+      <div className="bg-gray-900 py-4 px-6 flex items-center justify-between">
         <input
-          type="text"   
-          value={text}
-          placeholder="enter the prompt"
-          className="px-4 py-2 rounded-md w-80 bg-[#2D2D3A] text-white"
-          onChange={(e) => setText(e.target.value)}
-          onKeyPress={handleKeyPress}
+          type="text"
+          value={prompt}
+          placeholder="Type a message..."
+          className="px-4 py-2 rounded-md w-2/3 bg-gray-800 text-white focus:outline-none"
+          onChange={(e) => setPrompt(e.target.value)}
+          // onKeyPress={handleKeyPress}
         />
         <button
           onClick={handleClick}
           className="bg-blue-500 text-white px-4 py-2 rounded-md ml-2 hover:bg-blue-600"
         >
-          Submit
+          Send
         </button>
       </div>
     </div>
