@@ -8,13 +8,19 @@ function Chat() {
 
   const handleClick = async () => {
     // Define the predefined response based on the input message
-    const response = await axios.post("http://localhost:11434/api/generate", {
+    const response = await axios.post("http://localhost:11434/api/chat", {
       model: "medllama2",
       prompt: prompt,
       stream: false,
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
     });
 
-    const responseData = response.data.response;
+    const responseData = response.data.message.content;
     console.log(responseData);
     setResponse(responseData);
     setPrompt("");

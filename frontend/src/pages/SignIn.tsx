@@ -1,9 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Quote from "../components/Quotes";
 
 export default function SignIn() {
+  const navigate = useNavigate();
+  const handleSignIn = () => {
+    // Perform sign-in logic here...
+
+    // Navigate to the chatting page
+    navigate("/chatting");
+  };
+
   return (
     <div className="grid grid-cols-2">
-      <div className="bg-[#28282b] text-white h-screen">signin</div>
+      <div className="bg-[#28282b] text-white h-screen">
+        <Quote />
+      </div>
       <div className="bg-black text-white flex justify-center items-center  h-screen">
         <div className="flex justify-center items-center h-screen">
           <div className="w-96 p-8  rounded-lg mx-auto">
@@ -24,7 +35,7 @@ export default function SignIn() {
                 id="email"
                 type="text"
                 placeholder="example@example.com"
-                className="w-full border border-gray-300 rounded px-4 py-2"
+                className="w-full border border-gray-300 rounded px-4 py-2 text-black"
               />
             </div>
             <div className="mb-4">
@@ -35,11 +46,14 @@ export default function SignIn() {
                 id="password"
                 type="password"
                 placeholder="Password"
-                className="w-full border border-gray-300 rounded px-4 py-2"
+                className="w-full border border-gray-300 rounded px-4 py-2 text-black"
               />
             </div>
             <div>
-              <button className="bg-black text-white font-bold py-2 px-4 rounded w-full">
+              <button
+                onClick={handleSignIn}
+                className="bg-black text-white font-bold py-2 px-4 rounded w-full"
+              >
                 Sign In
               </button>
             </div>

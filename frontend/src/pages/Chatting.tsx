@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 interface Message {
@@ -44,8 +44,8 @@ function Chatting() {
   };
 
   return (
-    <div className="bg-gray-800 min-h-screen flex flex-col">
-      <div className="bg-gray-900 py-4 px-6 flex items-center justify-between fixed top-0 left-0 w-full z-10">
+    <div className="bg-white min-h-screen flex flex-col">
+      <div className="bg-slate-900 py-4 px-6 flex items-center justify-between fixed top-0 left-0 w-full z-10">
         <h1 className="text-lg font-bold text-white">VaidAI</h1>
       </div>
 
@@ -62,11 +62,11 @@ function Chatting() {
             } mb-4 transition-opacity ease-in-out duration-300`}
           >
             {message.sender === "user" ? (
-              <div className="max-w-xs px-4 py-2 rounded-lg bg-blue-500 text-white opacity-100">
+              <div className="max-w-xl px-4 py-2 rounded-lg bg-blue-500 text-white opacity-100">
                 {message.text}
               </div>
             ) : (
-              <div className="max-w-xs px-4 py-2 rounded-lg bg-gray-700 text-white opacity-100">
+              <div className="max-w-xl px-4 py-2 rounded-lg bg-gray-700 text-white opacity-100">
                 {message.text}
               </div>
             )}
@@ -74,7 +74,7 @@ function Chatting() {
         ))}
       </div>
 
-      <div className="bg-gray-900 py-4 px-6 flex items-center justify-between fixed bottom-0 left-0 w-full">
+      <div className="bg-slate-900 py-4 px-6 flex items-center justify-between fixed bottom-0 left-0 w-full">
         <input
           type="text"
           value={prompt}
